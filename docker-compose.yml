@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    rabbitmq:
+      image: rabbitmq:3-management-alpine
+      container_name: 'rabbitmq-js'
+      ports:
+        - 5672:5672
+        - 15672:15672
+      
+      networks:
+        - rabbitmq_js_net
+networks:
+  rabbitmq_js_net:
+    driver: bridge

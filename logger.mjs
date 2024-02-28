@@ -5,11 +5,11 @@ const ch = await conn.createChannel();
 
 const args = process.argv.slice(2);
 
-const exchange = await ch.assertExchange('logs', 'direct', {durable: false})
+const exchange = await ch.assertExchange('logs', 'topic', {durable: false})
 const queue = await ch.assertQueue('', { exclusive: true })
 
-args.forEach(function(severity) {
-  ch.bindQueue(queue.queue, exchange.exchange, severity);
+args.forEach(function(key) {
+  ch.bindQueue(queue.queue, exchange.exchange, key);
 });
 
 console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue.queue);
